@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js')
 
 module.exports = async ({ inter, queue }) => {
-    if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing... try again ? ❌`, ephemeral: true });
+    if (!queue || !queue.playing) return inter.reply({ content: `Nenhuma música tocando atualmente... Tente novamente.`, ephemeral: true });
 
     inter.member.send({
         embeds: [
@@ -21,7 +21,7 @@ module.exports = async ({ inter, queue }) => {
     }).then(() => {
         return inter.reply({ content: `I have sent you the title of the music by private messages ✅`, ephemeral: true });
     }).catch(error => {
-        return inter.reply({ content: `Unable to send you a private message... try again ? ❌`, ephemeral: true });
+        return inter.reply({ content: `Unable to send you a private message... Tente novamente.`, ephemeral: true });
     });
 
 

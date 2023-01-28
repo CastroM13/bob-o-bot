@@ -1,17 +1,17 @@
 module.exports = {
     name: 'back',
-    description: "Go back the song before",
+    description: "Voltar para a música anterior",
     voiceChannel: true,
 
     async execute({ inter }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue || !queue.playing) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
 
-        if (!queue.previousTracks[1]) return inter.reply({ content: `There was no music played before ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue.previousTracks[1]) return inter.reply({ content: `Não há nenhuma música anterior, ${inter.member}... Tente novamente.`, ephemeral: true });
 
         await queue.back();
 
-        inter.reply({ content:`Playing the **previous** track ✅`});
+        inter.reply({ content:`Tocando música anterior!`});
     },
 };

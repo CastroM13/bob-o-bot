@@ -2,13 +2,13 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
 
 module.exports = {
     name: 'nowplaying',
-    description: 'veiw what is playing!',
+    description: 'Veja o que está tocando!',
     voiceChannel: true,
 
     execute({ inter }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
 
         const track = queue.current;
 
@@ -24,33 +24,32 @@ module.exports = {
         const embed = new EmbedBuilder()
         .setAuthor({ name: track.title,  iconURL: client.user.displayAvatarURL({ size: 1024, dynamic: true })})
         .setThumbnail(track.thumbnail)
-        .setDescription(`Volume **${queue.volume}**%\nDuration **${trackDuration}**\nProgress ${progress}\nLoop mode **${methods[queue.repeatMode]}**\nRequested by ${track.requestedBy}`)
-        .setFooter({ text: 'Music comes first - Made with heart by Zerio ❤️', iconURL: inter.member.avatarURL({ dynamic: true })})
+        .setDescription(`Volume **${queue.volume}**%\nDuração **${trackDuration}**\nProgresso ${progress}\nRepetição **${methods[queue.repeatMode]}**\nSolicitado por ${track.requestedBy}`)
         .setColor('ff0000')
         .setTimestamp()
 
         const saveButton = new ButtonBuilder()
-        .setLabel('Save this track')
+        .setLabel('🤍')
         .setCustomId(JSON.stringify({ffb: 'savetrack'}))
         .setStyle('Danger')
 
         const volumeup = new ButtonBuilder()
-        .setLabel('Volume up')
+        .setLabel('🔉')
         .setCustomId(JSON.stringify({ffb: 'volumeup'}))
         .setStyle('Primary')
 
         const volumedown = new ButtonBuilder()
-        .setLabel('Volume Down')
+        .setLabel('🔊')
         .setCustomId(JSON.stringify({ffb: 'volumedown'}))
         .setStyle('Primary')
 
         const loop = new ButtonBuilder()
-        .setLabel('Loop')
+        .setLabel('🔁')
         .setCustomId(JSON.stringify({ffb: 'loop'}))
         .setStyle('Danger')
 
         const resumepause = new ButtonBuilder()
-         .setLabel('Resume & Pause')
+         .setLabel('⏯')
          .setCustomId(JSON.stringify({ffb: 'resume&pause'}))
          .setStyle('Success')
 

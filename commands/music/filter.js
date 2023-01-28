@@ -2,12 +2,12 @@ const { ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
     name: 'filter',
-    description: 'add a filter to your track',
+    description: 'Adiciona um filtro à sua música',
     voiceChannel: true,
     options: [
         {
             name: 'filter',
-            description: 'filter you want to add',
+            description: 'o filtro ',
             type: ApplicationCommandOptionType.String,
             required: true,
             choices: [...Object.keys(require("discord-player").AudioFilters.filters).map(m => Object({ name: m, value: m })).splice(0, 25)],
@@ -18,7 +18,7 @@ module.exports = {
     async execute({ inter, client }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue || !queue.playing) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
 
         const actualFilter = queue.getFiltersEnabled()[0];
 
@@ -32,7 +32,7 @@ module.exports = {
 
         const filter = filters.find((x) => x.toLowerCase() === infilter.toLowerCase());
 
-        if (!filter) return inter.reply({ content: `This filter doesn't exist ${inter.member}... try again ? ❌\n${actualFilter ? `Filter currently active ${actualFilter}.\n` : ''}List of available filters ${filters.map(x => `**${x}**`).join(', ')}.`, ephemeral: true });
+        if (!filter) return inter.reply({ content: `Esse filtro não existe ${inter.member}... Tente novamente.\n${actualFilter ? `Filter currently active ${actualFilter}.\n` : ''}List of available filters ${filters.map(x => `**${x}**`).join(', ')}.`, ephemeral: true });
 
         const filtersUpdated = {};
 
@@ -40,6 +40,6 @@ module.exports = {
 
         await queue.setFilters(filtersUpdated);
 
-        inter.reply({ content: `The filter ${filter} is now **${queue.getFiltersEnabled().includes(filter) ? 'enabled' : 'disabled'}** ✅\n*Reminder the longer the music is, the longer this will take.*` });
+        inter.reply({ content: `O filtro ${filter} está **${queue.getFiltersEnabled().includes(filter) ? 'habilitado' : 'desabilitado'}**` });
     },
 };

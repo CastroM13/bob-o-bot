@@ -1,13 +1,13 @@
 const { QueryType } = require('discord-player');
 const { ApplicationCommandOptionType } = require('discord.js');
 module.exports = {
-    name: 'play',
-    description: "play a song!",
+    name: 'bplay',
+    description: "Toque uma música",
     voiceChannel: true,
     options: [
         {
             name: 'song',
-            description: 'the song you want to play',
+            description: 'nome ou url da música que você quer tocar',
             type: ApplicationCommandOptionType.String,
             required: true,
         }
@@ -21,7 +21,7 @@ module.exports = {
             searchEngine: QueryType.AUTO
         });
 
-        if (!res || !res.tracks.length) return inter.editReply({ content: `No results found ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!res || !res.tracks.length) return inter.editReply({ content: `Não encontrei nada! ${inter.member}... Tente novamente.`, ephemeral: true });
 
         const queue = await player.createQueue(inter.guild, {
             metadata: inter.channel,
@@ -34,10 +34,10 @@ module.exports = {
             if (!queue.connection) await queue.connect(inter.member.voice.channel);
         } catch {
             await player.deleteQueue(inter.guildId);
-            return inter.editReply({ content: `I can't join the voice channel ${inter.member}... try again ? ❌`, ephemeral: true});
+            return inter.editReply({ content: `Não consigo entrar neste canal ${inter.member}... Tente novamente.`, ephemeral: true});
         }
 
-       await inter.editReply({ content:`Loading your ${res.playlist ? 'playlist' : 'track'}... 🎧`});
+       await inter.editReply({ content:`Carregando sua ${res.playlist ? 'playlist' : 'música'}... 🎧`});
 
         res.playlist ? queue.addTracks(res.tracks) : queue.addTrack(res.tracks[0]);
 

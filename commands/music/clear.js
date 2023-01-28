@@ -1,17 +1,17 @@
 module.exports = {
     name: 'clear',
-    description: 'clear all the music in the queue',
+    description: 'Limpe todas as músicas da fila',
     voiceChannel: true,
 
     async execute({ inter }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue || !queue.playing) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
 
-        if (!queue.tracks[0]) return inter.reply({ content: `No music in the queue after the current one ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue.tracks[0]) return inter.reply({ content: `Não há nenhuma música após a atual ${inter.member}... Tente novamente.`, ephemeral: true });
 
         await queue.clear();
 
-        inter.reply(`The queue has just been cleared 🗑️`);
+        inter.reply(`A fila foi limpada`);
     },
 };

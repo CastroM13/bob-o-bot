@@ -2,30 +2,29 @@ const { ApplicationCommandOptionType, ActionRowBuilder, ButtonBuilder, EmbedBuil
 
 module.exports = {
     name: 'controller',
-    description: "set controller channel ",
+    description: "Muda o canal controlador ",
     voiceChannel: false,
     permissions: PermissionsBitField.Flags.ManageMessages,
     options: [
         {
             name: 'channel',
-            description: 'the channel you want to send it to',
+            description: 'o canal que você quer que se torne o controlador',
             type: ApplicationCommandOptionType.Channel,
             required: true,
         }
     ],
     async execute({ inter, client }) { 
       let Channel = inter.options.getChannel('channel');
-      if (Channel.type !== 0) return inter.reply({ content: `you have to send it to a text channel.. ❌`, ephemeral: true})
+      if (Channel.type !== 0) return inter.reply({ content: `Canal de texto, bananinha!`, ephemeral: true})
 
     
       const embed = new EmbedBuilder()
-       .setTitle('control your music from the buttons below')
+       .setTitle('Controle a música pelos botões abaixo')
        .setImage(inter.guild.iconURL({ size: 4096, dynamic: true }))
        .setColor('#36393e')
-       .setFooter({ text: 'Music comes first - Made with heart by Zerio ❤️', iconURL: inter.member.avatarURL({ dynamic: true })})
 
 
-         inter.reply({ content: `sending controller to ${Channel}... ✅`, ephemeral: true})
+         inter.reply({ content: `enviando o controlador para ${Channel}... ✅`, ephemeral: true})
 
          const back = new ButtonBuilder()
          .setLabel('Back')

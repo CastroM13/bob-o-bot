@@ -2,15 +2,15 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'queue',
-    description: 'Get the songs in the queue',
+    description: 'Obtenha a fila de músicas',
     voiceChannel: true,
 
     execute({ client, inter }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
 
-        if (!queue.tracks[0]) return  inter.reply({ content: `No music in the queue after the current one ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue.tracks[0]) return  inter.reply({ content: `Não há nenhuma música após a atual ${inter.member}... Tente novamente.`, ephemeral: true });
 
         const methods = ['', '🔁', '🔂'];
 
@@ -26,8 +26,7 @@ module.exports = {
         .setAuthor({name: `Server queue - ${inter.guild.name} ${methods[queue.repeatMode]}`, iconURL: client.user.displayAvatarURL({ size: 1024, dynamic: true })})
         .setDescription(`Current ${queue.current.title}\n\n${tracks.slice(0, 5).join('\n')}\n\n${nextSongs}`)
         .setTimestamp()
-        .setFooter({ text: 'Music comes first - Made with heart by Zerio ❤️', iconURL: inter.member.avatarURL({ dynamic: true })})
-
+        
         inter.reply({ embeds: [embed] });
     },
 };

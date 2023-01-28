@@ -3,12 +3,12 @@ const { ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
     name: 'loop',
-    description: 'enable or disable looping of song\'s or the whole queue',
+    description: 'Ativar ou desativar a repetição de músicas',
     voiceChannel: true,
     options: [
         {
         name: 'action' ,
-        description: 'what action you want to preform on the loop',
+        description: 'que ação você pretende fazer na fila',
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
@@ -21,28 +21,28 @@ module.exports = {
     execute({ inter }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue || !queue.playing) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
         switch (inter.options._hoistedOptions.map(x => x.value).toString()) {
             case 'enable_loop_queue': {
-                if (queue.repeatMode === 1) return inter.reply({ content:`You must first disable the current music in the loop mode (/loop Disable) ${inter.member}... try again ? ❌`, ephemeral: true });
+                if (queue.repeatMode === 1) return inter.reply({ content:`Desative primeiro a repetição (/loop Disable) ${inter.member}... Tente novamente.`, ephemeral: true });
 
                 const success = queue.setRepeatMode( QueueRepeatMode.QUEUE);
 
-                return inter.reply({ content:success ? `Repeat mode **enabled** the whole queue will be repeated endlessly 🔁` : `Something went wrong ${inter.member}... try again ? ❌` });
+                return inter.reply({ content:success ? `Repetição de file **habilitada**` : `Ops! ${inter.member}... Tente novamente.` });
                 break
             }
             case 'disable_loop': {
                 const success = queue.setRepeatMode(QueueRepeatMode.OFF);
 
-                return inter.reply({ content:success ? `Repeat mode **disabled**` : `Something went wrong ${inter.member}... try again ? ❌` });
+                return inter.reply({ content:success ? `Repetição **desabilitada**` : `Ops! ${inter.member}... Tente novamente.` });
                 break
             }
             case 'enable_loop_song': {
-                if (queue.repeatMode === 2) return inter.reply({ content:`You must first disable the current music in the loop mode (/loop Disable) ${inter.member}... try again ? ❌`, ephemeral: true });
+                if (queue.repeatMode === 2) return inter.reply({ content:`Primeiro é necessário desabilitar a repetição atual (/loop Disable) ${inter.member}... Tente novamente.`, ephemeral: true });
 
                 const success = queue.setRepeatMode( QueueRepeatMode.TRACK);
                 
-                return inter.reply({ content:success ? `Repeat mode **enabled** the current song will be repeated endlessly (you can end the loop with /loop disable)` : `Something went wrong ${inter.member}... try again ? ❌` });
+                return inter.reply({ content:success ? `Repetição da música atual **habilitada**` : `Ops! ${inter.member}... Tente novamente.` });
                 break
             }
         }

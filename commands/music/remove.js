@@ -2,7 +2,7 @@ const { ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
     name: 'remove',
-    description: "remove a song from the queue",
+    description: "Remove da fila uma música",
     voiceChannel: true,
     options: [
         {
@@ -25,8 +25,8 @@ module.exports = {
 
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
-        if (!track && !number) inter.reply({ content: `You have to use one of the options to remove a song ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue || !queue.playing) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
+        if (!track && !number) inter.reply({ content: `You have to use one of the options to remove a song ${inter.member}... Tente novamente.`, ephemeral: true });
 
         if (track) {
 

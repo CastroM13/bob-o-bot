@@ -3,12 +3,12 @@ const { ApplicationCommandOptionType } = require('discord.js');
 
 module.exports = {
     name: 'volume',
-    description: 'adjust',
+    description: 'Ajusta o volume',
     voiceChannel: true,
     options: [
         {
             name: 'volume',
-            description: 'the amount volume',
+            description: 'a quantidade do volume',
             type: ApplicationCommandOptionType.Number,
             required: true,
             minValue: 1,
@@ -19,13 +19,13 @@ module.exports = {
     execute({ inter }) {
         const queue = player.getQueue(inter.guildId);
 
-        if (!queue) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (!queue) return inter.reply({ content: `Nenhuma música está tocando, ${inter.member}... Tente novamente.`, ephemeral: true });
         const vol = inter.options.getNumber('volume')
 
-        if (queue.volume === vol) return inter.reply({ content: `The volume you want to change is already the current one ${inter.member}... try again ? ❌`, ephemeral: true });
+        if (queue.volume === vol) return inter.reply({ content: `Já está nesse volume, seu banana! ${inter.member}`, ephemeral: true });
 
         const success = queue.setVolume(vol);
 
-        return inter.reply({ content:success ? `The volume has been modified to **${vol}**/**${maxVol}**% 🔊` : `Something went wrong ${inter.member}... try again ? ❌`});
+        return inter.reply({ content:success ? `Volume alterado para **${vol}**/**${maxVol}**% 🔊` : `Ops! ${inter.member}... Tente novamente.`});
     },
 };

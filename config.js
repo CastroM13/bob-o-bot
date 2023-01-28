@@ -5,7 +5,7 @@ module.exports = {
         token: process.env.token,
         playing: 'músicas',
         global: true,
-        guild: 'XXX'
+        guild: '371101397082570764'
     },
 
     opt: {

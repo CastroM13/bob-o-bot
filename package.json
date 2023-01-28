@@ -1,20 +1,30 @@
 {
-    "name": "bob",
-    "main": "main.js",
-    "author": "Bob",
-    "version": "6.0.0",
-    "description": "Sou Bob, o Bot! Um blob que é um bot.",
-    "scripts": {
-        "start": "node main.js"
-    },
-    "dependencies": {
-        "discord-player": "^5.3.1",
-        "discord.js": "^14.1.2",
-        "dotenv": "^16.0.3",
-        "ffmpeg-static": "^5.0.2",
-        "ms": "^3.0.0-canary.1",
-        "opusscript": "^0.0.8",
-        "youtube-sr": "^4.3.4",
-        "ytdl-core": "^4.11.2"
-    }
+  "name": "bob",
+  "main": "main.js",
+  "author": "Bob",
+  "version": "6.0.0",
+  "description": "Sou Bob, o Bot! Um blob que é um bot.",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "discord-player": "^5.3.1",
+    "discord.js": "^14.1.2",
+    "dotenv": "^16.0.3",
+    "ffmpeg-static": "^5.0.2",
+    "ms": "^3.0.0-canary.1",
+    "opusscript": "^0.0.8",
+    "soundcloud-scraper": "^5.0.3",
+    "youtube-sr": "^4.3.4",
+    "ytdl-core": "^4.11.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CastroM13/bob-o-bot.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CastroM13/bob-o-bot/issues"
+  },
+  "homepage": "https://github.com/CastroM13/bob-o-bot#readme"
 }
